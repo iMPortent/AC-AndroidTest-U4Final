@@ -1,5 +1,6 @@
 package nyc.c4q.androidtest_unit4final;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +22,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHol
     private static String TAG = "ColorAdapter";
     private List<String> colorNames;
     private HashMap<String, String> colorDict;
+    private Context context;
 
     public ColorAdapter(List<String> colors, HashMap<String, String> colorMap) {
         Sort.selectionSort(colors, true);
@@ -29,7 +32,10 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHol
 
     @Override
     public ColorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.color_itemview, parent, false);
+        context = parent.getContext();
+
+
+        View itemView = LayoutInflater.from(context).inflate(R.layout.color_itemview, parent, false);
         return new ColorViewHolder(itemView);
     }
 
@@ -60,12 +66,22 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHol
         return "#000000";
     }
 
-    class ColorViewHolder extends RecyclerView.ViewHolder {
+
+
+    class ColorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView name;
+
+        @Override
+        public void onClick(View v) {
+            String color = ((TextView) v).getText().toString(),
+                    colorCode = colorDict.get(color);
+            Toast.makeText(context, color + " has a hex value of " + colorCode, Toast.LENGTH_LONG).show();
+        }
 
         public ColorViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.color_name);
+            name.setOnClickListener(this);
         }
     }
 }
