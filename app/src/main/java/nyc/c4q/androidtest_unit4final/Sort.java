@@ -43,6 +43,22 @@ public class Sort {
                 list.remove(thisWord);
             }
             list.addAll(temp);
+        } else if (!isAscending) {
+            final int max = list.size();
+            //        ArrayList<String>checkwords = ;
+            for (int j = 0; j < max; j++) {
+                thisWord = list.get(0);
+
+                for (int i = 0; i < list.size(); i++) {
+                    if (thisWord.compareTo(list.get(i)) < 0) {
+                        thisWord = list.get(i);
+                    }
+
+                }
+                temp.add(thisWord);
+                list.remove(thisWord);
+            }
+            list.addAll(temp);
         }
     }
 }

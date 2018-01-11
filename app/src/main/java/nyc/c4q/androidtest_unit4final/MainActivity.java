@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         colorDict = new HashMap<>();
         holdTemp = new HashMap<>();
 
