@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         // https://raw.githubusercontent.com/operable/cog/master/priv/css-color-names.json
         makeRequestWithHttp("https://raw.githubusercontent.com/operable/cog/master/priv/css-color-names.json");
         addTo(holdTemp);
+
         colorsList = new ArrayList<>();
         String[] names = new String[]{"blue", "red", "purple", "indigo", "orange", "brown", "black", "green"};
         for (String n : names) colorsList.add(n);
